@@ -12,7 +12,7 @@ repositories {
 dependencies {
     testImplementation(platform(libs.junit.platform.bom))
     testImplementation(libs.junit.jupiter)
-    testRuntimeOnly(libs.junit.platform)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.test {
