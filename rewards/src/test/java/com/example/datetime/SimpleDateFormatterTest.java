@@ -1,11 +1,11 @@
-package datetime;
+package com.example.datetime;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeParseException;
 
-import static datetime.SimpleDateFormatter.*;
+import static com.example.datetime.SimpleDateFormatter.*;
 import static java.time.LocalDate.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
