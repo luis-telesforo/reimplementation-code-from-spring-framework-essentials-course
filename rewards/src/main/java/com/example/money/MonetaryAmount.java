@@ -1,22 +1,21 @@
 package com.example.money;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
+import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_EVEN;
 
 /**
  * A Java Record representation of Money.
- * Immutable and value object.
  */
-record MonetaryAmount(BigDecimal value) {
+public record MonetaryAmount(BigDecimal value) {
 
     /**
      * Create a new monetary amount from the specified value.
      * @param value the value of the amount; for example, in $USD "10.00" would be ten dollars, ".29" would be 29 cents
      */
-    MonetaryAmount {
-        value = value.setScale(2, RoundingMode.HALF_EVEN);
+    public MonetaryAmount {
+        value = value.setScale(2, HALF_EVEN);
     }
 
     /**
@@ -24,7 +23,7 @@ record MonetaryAmount(BigDecimal value) {
      * @param value the monetary amount as a double
      */
     MonetaryAmount(double value) {
-        this(BigDecimal.valueOf(value));
+        this(valueOf(value));
     }
 
     /**
@@ -74,7 +73,7 @@ record MonetaryAmount(BigDecimal value) {
      * @return the percentage amount
      */
     MonetaryAmount multiplyBy(double percentage) {
-        return new MonetaryAmount(this.value.multiply(BigDecimal.valueOf(percentage)));
+        return new MonetaryAmount(this.value.multiply(valueOf(percentage)));
     }
 
     /**
