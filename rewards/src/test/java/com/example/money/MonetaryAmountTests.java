@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import static com.example.money.MonetaryAmount.zero;
+import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_EVEN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,6 +23,20 @@ public class MonetaryAmountTests {
     @DisplayName("Non-Canonical constructor")
     void testMonetaryAmountConstructor() {
         MonetaryAmount monetaryAmount = new MonetaryAmount(10.5);
+        assertEquals(getBigDecimal(10.5), monetaryAmount.value());
+    }
+
+    @Test
+    @DisplayName("Non-Canonical constructor rounding up")
+    void testMonetaryAmountConstructorRoundingUp() {
+        MonetaryAmount monetaryAmount = new MonetaryAmount(10.509);
+        assertEquals(getBigDecimal(10.51), monetaryAmount.value());
+    }
+
+    @Test
+    @DisplayName("Non-Canonical constructor rounding down")
+    void testMonetaryAmountConstructorRoundingDown() {
+        MonetaryAmount monetaryAmount = new MonetaryAmount(10.501);
         assertEquals(getBigDecimal(10.5), monetaryAmount.value());
     }
 
@@ -69,9 +84,9 @@ public class MonetaryAmountTests {
     @Test
     @DisplayName("Canonical Constructor")
     void testMonetaryAmountCanonicalConstructor() {
-        MonetaryAmount amount = new MonetaryAmount(new BigDecimal("5.5"));
-        assertEquals(getBigDecimal(5.5), amount.asBigDecimal());
-        assertEquals(5.5, amount.asDouble());
+        MonetaryAmount monetaryAmount = new MonetaryAmount(new BigDecimal("5.5"));
+        assertEquals(getBigDecimal(5.5), monetaryAmount.asBigDecimal());
+        assertEquals(5.5, monetaryAmount.asDouble());
     }
 
     /**
@@ -82,7 +97,7 @@ public class MonetaryAmountTests {
      * @return The {@link BigDecimal} as explained above.
      */
     private static @NonNull BigDecimal getBigDecimal(double value) {
-        return BigDecimal.valueOf(value).setScale(2, HALF_EVEN);
+        return valueOf(value).setScale(2, HALF_EVEN);
     }
 }
 
