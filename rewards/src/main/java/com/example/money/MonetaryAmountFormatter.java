@@ -41,7 +41,7 @@ public final class MonetaryAmountFormatter {
      * @return The {@link MonetaryAmount} representing the parsed monetary amount in USD.
      * @throws ParseException if the parsing fails.
      */
-    public static MonetaryAmount parse(String amountString) throws ParseException {
+    public static MonetaryAmount parseAsMonetaryAmount(String amountString) throws ParseException {
         Number number = CURRENCY_FORMATTER.parse(amountString);
         BigDecimal bigDecimal = new BigDecimal(number.doubleValue());
         return new MonetaryAmount(bigDecimal);

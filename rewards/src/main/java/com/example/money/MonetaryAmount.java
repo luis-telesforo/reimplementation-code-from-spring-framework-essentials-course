@@ -19,22 +19,22 @@ public record MonetaryAmount(BigDecimal value) {
     }
 
     /**
-     * Create a new monetary amount from the specified value.
-     * @param value the monetary amount as a double
+     * Create a new {@link MonetaryAmount} from the specified value.
+     * @param value the monetary amount as a {@code double}
      */
     MonetaryAmount(double value) {
         this(valueOf(value));
     }
 
     /**
-     * Returns the zero (0.00) monetary amount.
+     * Returns the zero (0.00) {@link MonetaryAmount}.
      */
     static MonetaryAmount zero() {
         return new MonetaryAmount(0);
     }
 
     /**
-     * Add to this monetary amount, returning the sum as a new monetary amount.
+     * Add to this {@link MonetaryAmount}, returning the sum as a new {@link MonetaryAmount}.
      * @param amount the amount to add
      * @return the sum
      */
@@ -43,7 +43,7 @@ public record MonetaryAmount(BigDecimal value) {
     }
 
     /**
-     * Subtract from this monetary amount, returning the difference as a new monetary amount.
+     * Subtract from this {@link MonetaryAmount}, returning the difference as a new {@link MonetaryAmount}.
      * @param amount the amount to subtract
      * @return the difference
      */
@@ -52,34 +52,35 @@ public record MonetaryAmount(BigDecimal value) {
     }
 
     /**
-     * Multiply this monetary amount by a percentage.
-     * @param percentage the percentage
-     * @return the percentage amount
+     * Multiply this {@link MonetaryAmount} by another amount (as {@code double}).
+     * @param amount the amount to multiply by.
+     * @return the new amount.
      */
-    MonetaryAmount multiplyBy(double percentage) {
-        return new MonetaryAmount(this.value.multiply(valueOf(percentage)));
+    MonetaryAmount multiplyBy(double amount) {
+        return new MonetaryAmount(this.value.multiply(valueOf(amount)));
     }
 
     /**
-     * Returns true if this amount is greater than the amount.
+     * Returns {@code true} if this amount is greater than the other {@link MonetaryAmount}.
      * @param amount the monetary amount
-     * @return true or false
+     * @return {@code true} if and only if this amount is greater than the other {@link MonetaryAmount}
      */
     boolean greaterThan(MonetaryAmount amount) {
         return this.value.compareTo(amount.value) > 0;
     }
 
     /**
-     * Get this amount as a double. Useful for when a double type is needed by an external API or system.
-     * @return this amount as a double
+     * Get this amount as a {@code double}. Useful for when a double type is needed by an external API or system.
+     * @return this amount as a {@code double}
      */
     double asDouble() {
         return this.value.doubleValue();
     }
 
     /**
-     * Get this amount as a big decimal. Useful for when a BigDecimal type is needed by an external API or system.
-     * @return this amount as a big decimal
+     * Get this amount as a {@link BigDecimal}.
+     * Useful for when a {@link BigDecimal} type is needed by an external API or system.
+     * @return this amount as a {@link BigDecimal}
      */
     BigDecimal asBigDecimal() {
         return this.value;
