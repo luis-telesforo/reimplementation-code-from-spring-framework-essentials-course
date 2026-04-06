@@ -19,12 +19,6 @@ public class MonetaryAmountTests {
     }
 
     @Test
-    void testMonetaryAmountValueOf() {
-        MonetaryAmount amount = MonetaryAmount.fromString("$10.50");
-        assertEquals(getBigDecimal(10.5), amount.value());
-    }
-
-    @Test
     void testMonetaryAmountZero() {
         MonetaryAmount zero = zero();
         assertEquals(getBigDecimal(0), zero.value());

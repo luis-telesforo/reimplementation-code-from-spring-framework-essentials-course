@@ -1,17 +1,21 @@
 package com.example.money;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Locale;
 
-import static com.example.money.MonetaryAmount.fromString;
 import static java.text.NumberFormat.getCurrencyInstance;
 import static java.util.Locale.US;
 
 /**
- * Utility class providing utility methods to manipulate monetary amounts in USD format.
+ * Formats {@link MonetaryAmount} as {@link String Strings} representing money values in USD.
+ * It also parses {@link String Strings} representing money in USD to {@link MonetaryAmount}
  */
 public final class MonetaryAmountFormatter {
-
+    /**
+     * Instance of {@link NumberFormat#getCurrencyInstance(Locale)} for {@link Locale#US}.
+     */
     private static final NumberFormat CURRENCY_FORMATTER = getCurrencyInstance(US);
 
     /**
@@ -20,24 +24,27 @@ public final class MonetaryAmountFormatter {
     private MonetaryAmountFormatter() {}
 
     /**
-     * Formats a number as a monetary amount in USD.
+     * Formats a {@link MonetaryAmount} as a {@link String} in USD format.
      *
-     * @param amount The amount to format as a monetary value in USD.
+     * @param monetaryAmount The {@link MonetaryAmount} to format as a monetary value in USD.
      * @return A formatted string representing the monetary amount in USD.
      */
-    public static String formatToCurrency(double amount) {
-        return CURRENCY_FORMATTER.format(amount);
+    public static String formatToCurrency(MonetaryAmount monetaryAmount) {
+        return CURRENCY_FORMATTER.format(monetaryAmount.asDouble());
     }
 
     /**
-     * Parses a string representing a monetary amount in USD and returns the numeric value.
+     * Parses a string representing a monetary value in USD and returns its
+     * {@link MonetaryAmount} representation.
      *
      * @param amountString The string to parse as a monetary amount in USD.
-     * @return The numeric value of the parsed monetary amount in USD, or null if parsing fails.
+     * @return The {@link MonetaryAmount} representing the parsed monetary amount in USD.
+     * @throws ParseException if the parsing fails.
      */
     public static MonetaryAmount parse(String amountString) throws ParseException {
         Number number = CURRENCY_FORMATTER.parse(amountString);
-        return fromString(number.toString());
+        BigDecimal bigDecimal = new BigDecimal(number.doubleValue());
+        return new MonetaryAmount(bigDecimal);
     }
 }
 

@@ -27,22 +27,6 @@ public record MonetaryAmount(BigDecimal value) {
     }
 
     /**
-     * Convert the string representation of a monetary amount (e.g. $5 or 5) to a MonetaryAmount object.
-     * @param string the monetary amount string
-     * @return the monetary amount object
-     */
-    static MonetaryAmount fromString(String string) {
-        if (string == null || string.isEmpty()) {
-            throw new IllegalArgumentException("The monetary amount value is required");
-        }
-        if (string.startsWith("$")) {
-            int index = string.indexOf('$');
-            string = string.substring(index + 1);
-        }
-        return new MonetaryAmount(new BigDecimal(string));
-    }
-
-    /**
      * Returns the zero (0.00) monetary amount.
      */
     static MonetaryAmount zero() {
