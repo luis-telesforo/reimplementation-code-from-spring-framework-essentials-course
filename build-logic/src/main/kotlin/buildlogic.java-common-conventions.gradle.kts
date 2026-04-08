@@ -7,7 +7,9 @@
 plugins {
     // Apply the java Plugin to add support for Java.
     java
+    checkstyle
 }
+val javaVersion = versionCatalogs.find("libs").get().findVersion("java").get().toString()
 
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -30,10 +32,19 @@ testing {
         }
     }
 }
-
 // Apply a specific Java toolchain to ease working on different environments.
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(25)
+        languageVersion = JavaLanguageVersion.of(javaVersion)
     }
+}
+
+checkstyle {
+    toolVersion = versionCatalogs.find("libs").get().findVersion("checkstyle").get().toString()
+    configProperties =
+        mapOf(
+            "cacheFile" to
+                    file("/checkstyle_cache.txt").absolutePath,
+            "jdkVersion" to javaVersion,
+        )
 }

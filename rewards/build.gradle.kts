@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.java.library)
+    alias(libs.plugins.java.library.conventions)
 }
 
 group = "example"

@@ -2,6 +2,8 @@
 # https://docs.gradle.org/current/userguide/version_catalogs.html#sec::toml-dependencies-format
 [versions]
 junit-version = "6.0.0"
+checkstyle = "13.4.0"
+java = "25"
 
 [libraries]
 junit-platform-bom = { module = "org.junit:junit-bom", version.ref = "junit-version" }
@@ -10,3 +12,4 @@ junit-platform-launcher = {module ="org.junit.platform:junit-platform-launcher"}
 
 [plugins]
 java-library = {id = "java-library"}
+java-library-conventions = {id = "buildlogic.java-library-conventions"}
