@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * Tests for {@link MonetaryAmount}
+ * Tests for {@link MonetaryAmount}.
  */
 @DisplayName("MonetaryAmount tests")
 public class MonetaryAmountTests {
@@ -90,7 +90,8 @@ public class MonetaryAmountTests {
     }
 
     /**
-     * Calls {@link BigDecimal#valueOf(double)} and then {@link BigDecimal#setScale(int, RoundingMode)} to match
+     * Calls {@link BigDecimal#valueOf(double)} and then
+     * {@link BigDecimal#setScale(int, RoundingMode)} to match
      * {@link MonetaryAmount} definition.
      *
      * @param value The value to be set as {@link BigDecimal}.

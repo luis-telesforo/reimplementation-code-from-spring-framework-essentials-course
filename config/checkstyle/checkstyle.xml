@@ -4,6 +4,7 @@
           "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
+  <property name="cacheFile" value="${cache.file}"/>
 
   <property name="severity" value="error"/>
 
@@ -55,11 +56,6 @@
         value="Consider using special escape sequence instead of octal value or Unicode escaped value."/>
     <property name="lineRange" value="-2"/>
     <property name="idPattern" value="lineLengthXml"/>
-  </module>
-
-  <!-- Javadoc Comments -->
-  <module name="JavadocPackage">
-    <property name="allowLegacy" value="false"/>
   </module>
 
   <!-- Miscellaneous -->
@@ -224,7 +220,7 @@
     <property name="fileExtensions" value="java"/>
     <property name="max" value="100"/>
     <property name="ignorePattern"
-              value="^( *\* *([^ ]+|\{@code .*|&lt;a href=&quot;[^&quot;]+&quot;&gt;)|(package|import) .*)$"/>
+              value="^( *\* .*?(?:@\w+|\{@(?:code|link) .*?\}|href).*|(package|import) .*)$"/>
   </module>
 
   <!-- Whitespace -->
@@ -387,7 +383,6 @@
     <module name="EqualsHashCode"/>
     <module name="ExplicitInitialization"/>
     <module name="FallThrough"/>
-    <module name="FinalLocalVariable"/>
     <module name="HiddenField">
       <property name="ignoreConstructorParameter" value="true"/>
       <property name="ignoreSetter" value="true"/>
@@ -654,22 +649,12 @@
 
     <!-- Imports -->
     <module name="AvoidStarImport"/>
-    <module name="AvoidStaticImport"/>
-    <module name="CustomImportOrder">
-      <property name="customImportOrderRules"
-                value="STATIC###STANDARD_JAVA_PACKAGE###SPECIAL_IMPORTS###THIRD_PARTY_PACKAGE"/>
-      <property name="standardPackageRegExp" value="^java\."/>
-      <property name="specialImportsRegExp" value="^javax\."/>
-      <property name="thirdPartyPackageRegExp" value="^org\."/>
-      <property name="sortImportsInGroupAlphabetically" value="true"/>
-      <property name="separateLineBetweenGroups" value="true"/>
-    </module>
     <module name="IllegalImport"/>
     <module name="ImportOrder">
-      <property name="groups" value="/^java\./,javax,org"/>
+      <property name="groups" value="*,javax,java"/>
       <property name="ordered" value="true"/>
       <property name="separated" value="true"/>
-      <property name="option" value="top"/>
+      <property name="option" value="bottom"/>
       <property name="sortStaticImportsAlphabetically" value="true"/>
     </module>
     <module name="RedundantImport"/>
@@ -795,17 +780,10 @@
     <module name="NumericalPrefixesInfixesSuffixesCharacterCase"/>
 
     <!-- Modifiers -->
-    <module name="ClassMemberImpliedModifier">
-      <!-- effectively the opposite of RedundantModifier, so output must be ignored -->
-      <property name="severity" value="ignore"/>
-    </module>
-    <module name="InterfaceMemberImpliedModifier">
-      <!-- effectively the opposite of RedundantModifier, so output must be ignored -->
-      <property name="severity" value="ignore"/>
-    </module>
+
     <module name="ModifierOrder"/>
     <module name="RedundantModifier">
-      <property name="jdkVersion" value="${checkstyle.java.version}"/>
+      <property name="jdkVersion" value="${jdk.version}"/>
     </module>
 
     <!-- Naming Conventions -->

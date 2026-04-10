@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeParseException;
 
-import static com.example.datetime.SimpleDateFormatter.*;
+import static com.example.datetime.SimpleDateFormatter.formatDate;
+import static com.example.datetime.SimpleDateFormatter.parseDate;
 import static java.time.LocalDate.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Tests for {@link SimpleDateFormatter}
+ * Tests for {@link SimpleDateFormatter}.
  */
 @DisplayName("SimpleDateFormatter")
 class SimpleDateFormatterTest {
@@ -50,17 +51,27 @@ class SimpleDateFormatterTest {
     void parseDateStrictMonthTest() {
         DateTimeParseException dateTimeParseException =
                 assertThrows(DateTimeParseException.class, () -> parseDate("1920-13-03"));
-        assertEquals("Text '1920-13-03' could not be parsed: Invalid value for MonthOfYear (valid values 1 - 12): 13", dateTimeParseException.getMessage());
+        String expectedMessage =
+                """
+                Text '1920-13-03' could not be parsed: \
+                Invalid value for MonthOfYear (valid values 1 - 12): 13\
+                """;
+        assertEquals(expectedMessage, dateTimeParseException.getMessage());
     }
 
     @Test
     void parseDateStrictDaysTest() {
         DateTimeParseException dateTimeParseException =
                 assertThrows(DateTimeParseException.class, () -> parseDate("1920-01-32"));
-        assertEquals("Text '1920-01-32' could not be parsed: Invalid value for DayOfMonth (valid values 1 - 28/31): 32", dateTimeParseException.getMessage());
+        String expectedMessage =
+                """
+                Text '1920-01-32' could not be parsed: \
+                Invalid value for DayOfMonth (valid values 1 - 28/31): 32\
+                """;
+        assertEquals(expectedMessage, dateTimeParseException.getMessage());
     }
 
-        @Test
+    @Test
     void formatDateTest() {
         assertEquals("1920-01-03", formatDate(of(1920, 1, 3)));
     }

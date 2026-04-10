@@ -13,3 +13,9 @@ repositories {
     // Use the plugin portal to apply community plugins in convention plugins.
     gradlePluginPortal()
 }
+
+tasks.withType(Checkstyle::class.java) {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
+    }
+}

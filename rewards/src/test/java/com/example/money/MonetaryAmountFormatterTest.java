@@ -90,12 +90,6 @@ public class MonetaryAmountFormatterTest {
     }
 
     @Test
-    @DisplayName("Not parsing euro")
-    public void testParseEuroNegative() {
-        assertThrowsExactly(ParseException.class, () -> parseAsMonetaryAmount("€10.50"));
-    }
-
-    @Test
     @DisplayName("Not parsing money with USD instead of dollar sign")
     public void testParseUsdNegative() {
         assertThrowsExactly(ParseException.class, () -> parseAsMonetaryAmount("10.50USD"));

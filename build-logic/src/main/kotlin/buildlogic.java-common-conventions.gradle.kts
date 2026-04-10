@@ -43,8 +43,8 @@ checkstyle {
     toolVersion = versionCatalogs.find("libs").get().findVersion("checkstyle").get().toString()
     configProperties =
         mapOf(
-            "cacheFile" to
-                    file("/checkstyle_cache.txt").absolutePath,
-            "jdkVersion" to javaVersion,
+            "cache.file" to
+                    file("$rootDir/config/checkstyle/checkstyle_cache").absolutePath,
+            "jdk.version" to javaVersion
         )
 }

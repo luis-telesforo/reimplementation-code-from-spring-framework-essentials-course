@@ -21,7 +21,8 @@ public final class MonetaryAmountFormatter {
     /**
      * Private constructor prevents instantiation of the utility class.
      */
-    private MonetaryAmountFormatter() {}
+    private MonetaryAmountFormatter() {
+    }
 
     /**
      * Formats a {@link MonetaryAmount} as a {@link String} in USD format.
