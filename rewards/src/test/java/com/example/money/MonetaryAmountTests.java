@@ -29,14 +29,14 @@ public class MonetaryAmountTests {
     @Test
     @DisplayName("Non-Canonical constructor rounding up")
     void testMonetaryAmountConstructorRoundingUp() {
-        MonetaryAmount monetaryAmount = new MonetaryAmount(10.509);
+        MonetaryAmount monetaryAmount = new MonetaryAmount(10.5099999);
         assertEquals(getBigDecimal(10.51), monetaryAmount.value());
     }
 
     @Test
     @DisplayName("Non-Canonical constructor rounding down")
     void testMonetaryAmountConstructorRoundingDown() {
-        MonetaryAmount monetaryAmount = new MonetaryAmount(10.501);
+        MonetaryAmount monetaryAmount = new MonetaryAmount(10.50111111);
         assertEquals(getBigDecimal(10.5), monetaryAmount.value());
     }
 
@@ -82,11 +82,10 @@ public class MonetaryAmountTests {
     }
 
     @Test
-    @DisplayName("Canonical Constructor")
+    @DisplayName("As double rounds value")
     void testMonetaryAmountCanonicalConstructor() {
-        MonetaryAmount monetaryAmount = new MonetaryAmount(new BigDecimal("5.5"));
-        assertEquals(getBigDecimal(5.5), monetaryAmount.asBigDecimal());
-        assertEquals(5.5, monetaryAmount.asDouble());
+        MonetaryAmount monetaryAmount = new MonetaryAmount(new BigDecimal("5.09999999999999"));
+        assertEquals(5.1, monetaryAmount.asDouble());
     }
 
     /**

@@ -88,15 +88,5 @@ public record MonetaryAmount(BigDecimal value) {
     double asDouble() {
         return this.value.doubleValue();
     }
-
-    /**
-     * Get this amount as a {@link BigDecimal}.
-     * Useful for when a {@link BigDecimal} type is needed by an external API or system.
-     *
-     * @return this amount as a {@link BigDecimal}.
-     */
-    BigDecimal asBigDecimal() {
-        return this.value;
-    }
 }
 

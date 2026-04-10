@@ -1,6 +1,5 @@
 package com.example.money;
 
-import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -30,7 +29,7 @@ public final class MonetaryAmountFormatter {
      * @param monetaryAmount The {@link MonetaryAmount} to format as a monetary value in USD.
      * @return A formatted string representing the monetary amount in USD.
      */
-    public static String formatToCurrency(MonetaryAmount monetaryAmount) {
+    public static String formatMonetaryAmount(MonetaryAmount monetaryAmount) {
         return CURRENCY_FORMATTER.format(monetaryAmount.asDouble());
     }
 
@@ -44,8 +43,7 @@ public final class MonetaryAmountFormatter {
      */
     public static MonetaryAmount parseAsMonetaryAmount(String amountString) throws ParseException {
         Number number = CURRENCY_FORMATTER.parse(amountString);
-        BigDecimal bigDecimal = new BigDecimal(number.doubleValue());
-        return new MonetaryAmount(bigDecimal);
+        return new MonetaryAmount(number.doubleValue());
     }
 }
 

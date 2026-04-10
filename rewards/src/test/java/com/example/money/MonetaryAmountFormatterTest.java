@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 
-import static com.example.money.MonetaryAmountFormatter.formatToCurrency;
+import static com.example.money.MonetaryAmountFormatter.formatMonetaryAmount;
 import static com.example.money.MonetaryAmountFormatter.parseAsMonetaryAmount;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -20,21 +20,21 @@ public class MonetaryAmountFormatterTest {
     @DisplayName("Format no decimal MonetaryAmounts")
     public void testFormatNoDecimalMonetaryAmounts() {
         MonetaryAmount amount1 = new MonetaryAmount(2);
-        assertEquals("$2.00", formatToCurrency(amount1));
+        assertEquals("$2.00", formatMonetaryAmount(amount1));
     }
 
     @Test
     @DisplayName("Format decimal MonetaryAmounts")
     public void testFormatDecimalMonetaryAmounts() {
         MonetaryAmount amount3 = new MonetaryAmount(10.01);
-        assertEquals("$10.01", formatToCurrency(amount3));
+        assertEquals("$10.01", formatMonetaryAmount(amount3));
     }
 
     @Test
     @DisplayName("Format decimal MonetaryAmounts")
     public void testFormatDecimalMonetaryAmount() {
         MonetaryAmount monetaryAmount = new MonetaryAmount(10.01);
-        assertEquals("$10.01", formatToCurrency(monetaryAmount));
+        assertEquals("$10.01", formatMonetaryAmount(monetaryAmount));
     }
 
     @Test
