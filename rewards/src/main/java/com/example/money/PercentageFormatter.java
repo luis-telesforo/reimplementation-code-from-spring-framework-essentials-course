@@ -8,6 +8,10 @@ import java.util.Locale;
 import static java.text.NumberFormat.getPercentInstance;
 import static java.util.Locale.US;
 
+/**
+ * Formats {@link Percentage} as {@link String}s representing percentages.
+ * It also parses {@link String Strings} to {@link Percentage}.
+ */
 public class PercentageFormatter {
     /**
      * Instance of {@link NumberFormat#getPercentInstance(Locale)} for {@link Locale#US}.
