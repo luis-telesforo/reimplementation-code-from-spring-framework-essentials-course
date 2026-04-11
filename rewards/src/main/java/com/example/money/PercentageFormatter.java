@@ -1,6 +1,5 @@
 package com.example.money;
 
-
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
@@ -12,7 +11,7 @@ import static java.util.Locale.US;
  * Formats {@link Percentage} as {@link String}s representing percentages.
  * It also parses {@link String Strings} to {@link Percentage}.
  */
-public class PercentageFormatter {
+public final class PercentageFormatter {
     /**
      * Instance of {@link NumberFormat#getPercentInstance(Locale)} for {@link Locale#US}.
      */

@@ -101,4 +101,13 @@ public class MonetaryAmountFormatterTest {
         MonetaryAmount monetaryAmount = parseAsMonetaryAmount("$43.01USD");
         assertEquals(43.01, monetaryAmount.asDouble());
     }
+
+    @Test
+    @DisplayName("Formatting and Parsing do not alter MonetaryAmount")
+    void testFormatAndParseConsistency() throws ParseException {
+        MonetaryAmount original = new MonetaryAmount(10.25);
+        String formatted = formatMonetaryAmount(original);
+        MonetaryAmount parsed = parseAsMonetaryAmount(formatted);
+        assertEquals(original, parsed, "Formatting and parsing should be consistent");
+    }
 }

@@ -11,7 +11,9 @@ import static java.math.RoundingMode.HALF_UP;
  * @param value the percentage value, where 1.0 represents 100%
  */
 public record Percentage(BigDecimal value) {
-
+    /**
+     * Error message for bad argument used in constructor.
+     */
     public static final String CONSTRUCTOR_ERROR_MESSAGE =
             "Percentage value must be between 0 and 1; your value was ";
 
