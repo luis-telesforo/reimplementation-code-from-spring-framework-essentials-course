@@ -2,9 +2,8 @@ package com.example.money;
 
 import java.math.BigDecimal;
 
-import static java.math.BigDecimal.ONE;
 import static java.math.BigDecimal.valueOf;
-import static java.math.RoundingMode.HALF_EVEN;
+import static java.math.RoundingMode.HALF_UP;
 
 /**
  * A Java Record representation of a percentage.
@@ -13,13 +12,20 @@ import static java.math.RoundingMode.HALF_EVEN;
  */
 public record Percentage(BigDecimal value) {
 
+    public static final String CONSTRUCTOR_ERROR_MESSAGE =
+            "Percentage value must be between 0 and 1; your value was ";
+
     /**
      * Create a new percentage from the specified value.
      *
      * @param value the percentage value; for example, 0.05 would represent 5%
      */
     public Percentage {
-        value = value.setScale(4, HALF_EVEN);
+        value = value.setScale(2, HALF_UP);
+        if (value.compareTo(BigDecimal.ZERO) < 0 || value.compareTo(BigDecimal.ONE) > 0) {
+            throw new IllegalArgumentException(
+                    CONSTRUCTOR_ERROR_MESSAGE + value);
+        }
     }
 
     /**
@@ -58,9 +64,6 @@ public record Percentage(BigDecimal value) {
      */
     public Percentage add(Percentage percentage) throws IllegalArgumentException {
         BigDecimal sum = this.value.add(percentage.value);
-        if (sum.compareTo(ONE) > 0) {
-            throw new IllegalArgumentException("Percentage cannot exceed 100%");
-        }
         return new Percentage(sum);
     }
 

@@ -14,8 +14,3 @@ repositories {
     gradlePluginPortal()
 }
 
-tasks.withType(Checkstyle::class.java) {
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(libs.versions.java.get())
-    }
-}

@@ -4,6 +4,7 @@
 junit-version = "6.0.0"
 checkstyle = "13.4.0"
 java = "25"
+jacoco = "0.8.14"
 
 [libraries]
 junit-platform-bom = { module = "org.junit:junit-bom", version.ref = "junit-version" }

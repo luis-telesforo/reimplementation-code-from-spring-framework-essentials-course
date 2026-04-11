@@ -8,6 +8,7 @@ plugins {
     // Apply the java Plugin to add support for Java.
     java
     checkstyle
+    jacoco
 }
 val javaVersion = versionCatalogs.find("libs").get().findVersion("java").get().toString()
 
@@ -47,4 +48,25 @@ checkstyle {
                     file("$rootDir/config/checkstyle/checkstyle_cache").absolutePath,
             "jdk.version" to javaVersion
         )
+}
+
+jacoco {
+    toolVersion = versionCatalogs.find("libs").get().findVersion("jacoco").get().toString()
+}
+
+tasks.withType(Checkstyle::class.java) {
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+}
+
+tasks.test {
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required = false
+        csv.required = false
+    }
 }

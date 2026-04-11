@@ -11,6 +11,7 @@ import static com.example.money.MonetaryAmount.zero;
 import static java.math.BigDecimal.valueOf;
 import static java.math.RoundingMode.HALF_EVEN;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
@@ -79,6 +80,8 @@ public class MonetaryAmountTests {
         MonetaryAmount monetaryAmount2 = new MonetaryAmount(5);
         MonetaryAmount monetaryAmount1 = new MonetaryAmount(3);
         assertTrue(monetaryAmount2.greaterThan(monetaryAmount1));
+        assertFalse(monetaryAmount1.greaterThan(monetaryAmount2));
+        assertFalse(monetaryAmount2.greaterThan(monetaryAmount2));
     }
 
     @Test
