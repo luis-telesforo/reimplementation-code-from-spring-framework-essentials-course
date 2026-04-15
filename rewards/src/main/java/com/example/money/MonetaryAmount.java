@@ -34,7 +34,7 @@ public record MonetaryAmount(BigDecimal value) {
     /**
      * Returns the zero (0.00) {@link MonetaryAmount}.
      */
-    static MonetaryAmount zero() {
+    public static MonetaryAmount zero() {
         return new MonetaryAmount(0);
     }
 
