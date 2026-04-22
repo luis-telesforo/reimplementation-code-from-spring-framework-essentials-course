@@ -91,49 +91,52 @@ public class Beneficiary {
      * data access code (repositories that work with an Object Relational Mapper
      * (ORM)). Should never be set by application code explicitly.
      *
-     * @param entityId
-     *            the internal entity identifier
+     * @param entityId the internal entity identifier
      */
     public void setEntityId(Long entityId) {
         this.entityId = entityId;
     }
 
     /**
-     * Returns the beneficiary name.
+     * Returns the {@link Beneficiary} name.
+     *
+     * @return the name
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Returns the beneficiary's allocation percentage in this account.
+     * Returns the beneficiary's allocation {@link Percentage} in this account.
+     *
+     * @return the {@link Percentage}
      */
     public Percentage getAllocationPercentage() {
         return allocationPercentage;
     }
 
     /**
-     * Sets the beneficiary's allocation percentage in this account.
+     * Sets the beneficiary's allocation {@link Percentage} in this account.
      *
-     * @param allocationPercentage
-     *            The new allocation percentage
+     * @param allocationPercentage The new allocation percentage
      */
     public void setAllocationPercentage(Percentage allocationPercentage) {
         this.allocationPercentage = allocationPercentage;
     }
 
     /**
-     * Returns the amount of savings this beneficiary has accrued.
+     * Returns the {@link MonetaryAmount} this beneficiary has accrued.
+     *
+     * @return the savings
      */
     public MonetaryAmount getSavings() {
         return savings;
     }
 
     /**
-     * Credit the amount to this beneficiary's saving balance.
+     * Credit the given {@link MonetaryAmount} to this beneficiary's saving balance.
      *
-     * @param amount
-     *            the amount to credit
+     * @param amount  the amount to credit
      */
     public void credit(MonetaryAmount amount) {
         savings = savings.plus(amount);
