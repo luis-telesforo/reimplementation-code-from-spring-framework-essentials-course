@@ -23,19 +23,19 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 public class Beneficiary {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID",  nullable = false)
     @GeneratedValue(strategy = IDENTITY)
     private Long entityId;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "ALLOCATION_PERCENTAGE"))
+    @AttributeOverride(name = "value", column = @Column(name = "ALLOCATION_PERCENTAGE", nullable = false))
     private Percentage allocationPercentage;
 
     @Embedded
-    @AttributeOverride(name = "value", column = @Column(name = "SAVINGS"))
+    @AttributeOverride(name = "value", column = @Column(name = "SAVINGS", nullable = false))
     private MonetaryAmount savings = zero();
 
     /**
