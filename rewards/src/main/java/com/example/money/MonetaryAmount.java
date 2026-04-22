@@ -44,7 +44,7 @@ public record MonetaryAmount(BigDecimal value) {
      * @param amount the amount to add.
      * @return the sum.
      */
-    MonetaryAmount plus(MonetaryAmount amount) {
+    public MonetaryAmount plus(MonetaryAmount amount) {
         return new MonetaryAmount(this.value.add(amount.value));
     }
 

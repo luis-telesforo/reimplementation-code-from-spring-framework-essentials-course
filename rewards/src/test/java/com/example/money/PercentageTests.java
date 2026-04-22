@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Tests for {@link Percentage}.
  */
 @DisplayName("Percentage tests")
-public class PercentageTests {
+class PercentageTests {
 
     @Test
     @DisplayName("Constructor from double")

@@ -11,10 +11,10 @@ import static java.util.Set.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-public class AccountContributionTests {
+class AccountContributionTests {
     @Test
     @DisplayName("The correct Distribution is returned")
-    public void testGetDistribution() {
+    void testGetDistribution() {
         Distribution distributionA = new Distribution("a", zero(), oneHundred(), zero());
         Distribution distributionB = new Distribution("b", zero(), oneHundred(), zero());
         AccountContribution accountContribution = new AccountContribution("",
@@ -25,7 +25,7 @@ public class AccountContributionTests {
 
     @Test
     @DisplayName("Exception is thrown if looking for a non-existent Distribution")
-    public void testNegativeGetDistribution() {
+    void testNegativeGetDistribution() {
         Distribution distributionA = new Distribution("a", zero(), oneHundred(), zero());
         AccountContribution accountContribution = new AccountContribution("", zero(),
                 of(distributionA));

@@ -12,7 +12,7 @@ import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
  * Centralizes the use of {@link DateTimeFormatter#ISO_LOCAL_DATE},
  * to simplify further refactoring of date format if needed.
  */
-public final class LocalDateFormatter {
+public final class LocalDateFormatUtil {
     /**
      * This application assumes the date is the one from {@code UTC+00}.
      */
@@ -21,7 +21,7 @@ public final class LocalDateFormatter {
     /**
      * Because this is a utility class.
      */
-    private LocalDateFormatter() {
+    private LocalDateFormatUtil() {
     }
 
     /**

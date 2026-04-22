@@ -11,7 +11,7 @@ import static java.util.Locale.US;
  * Formats {@link Percentage} as {@link String}s representing percentages.
  * It also parses {@link String Strings} to {@link Percentage}.
  */
-public final class PercentageFormatter {
+public final class PercentageFormatUtil {
     /**
      * Instance of {@link NumberFormat#getPercentInstance(Locale)} for {@link Locale#US}.
      */
@@ -20,7 +20,7 @@ public final class PercentageFormatter {
     /**
      * Private constructor prevents instantiation of the utility class.
      */
-    private PercentageFormatter() {
+    private PercentageFormatUtil() {
     }
 
     /**

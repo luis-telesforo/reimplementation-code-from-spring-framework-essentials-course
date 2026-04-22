@@ -11,7 +11,7 @@ import static java.util.Locale.US;
  * Formats {@link MonetaryAmount} as {@link String Strings} representing money values in USD.
  * It also parses {@link String Strings} representing money in USD to {@link MonetaryAmount}
  */
-public final class MonetaryAmountFormatter {
+public final class MonetaryAmountFormatUtil {
     /**
      * Instance of {@link NumberFormat#getCurrencyInstance(Locale)} for {@link Locale#US}.
      */
@@ -20,7 +20,7 @@ public final class MonetaryAmountFormatter {
     /**
      * Private constructor prevents instantiation of the utility class.
      */
-    private MonetaryAmountFormatter() {
+    private MonetaryAmountFormatUtil() {
     }
 
     /**

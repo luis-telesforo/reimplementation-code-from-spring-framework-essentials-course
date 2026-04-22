@@ -5,16 +5,16 @@ import org.junit.jupiter.api.Test;
 
 import java.text.ParseException;
 
-import static com.example.money.PercentageFormatter.formatPercentage;
-import static com.example.money.PercentageFormatter.parseToPercentage;
+import static com.example.money.PercentageFormatUtil.formatPercentage;
+import static com.example.money.PercentageFormatUtil.parseToPercentage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Tests for {@link PercentageFormatter}.
+ * Tests for {@link PercentageFormatUtil}.
  */
-@DisplayName("Tests for PercentageFormatter")
-class PercentageFormatterTests {
+@DisplayName("Tests for PercentageFormatUtil")
+class PercentageFormatUtilTests {
 
     @Test
     @DisplayName("Formatting percentages")

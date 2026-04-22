@@ -5,8 +5,8 @@ import com.example.money.MonetaryAmount;
 import java.text.ParseException;
 import java.time.LocalDate;
 
-import static com.example.datetime.LocalDateFormatter.today;
-import static com.example.money.MonetaryAmountFormatter.parseAsMonetaryAmount;
+import static com.example.datetime.LocalDateFormatUtil.today;
+import static com.example.money.MonetaryAmountFormatUtil.parseAsMonetaryAmount;
 import static java.time.LocalDate.of;
 
 /**

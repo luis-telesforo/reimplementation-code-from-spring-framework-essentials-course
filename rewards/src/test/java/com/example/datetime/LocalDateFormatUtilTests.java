@@ -5,17 +5,17 @@ import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeParseException;
 
-import static com.example.datetime.LocalDateFormatter.formatDate;
-import static com.example.datetime.LocalDateFormatter.parseDate;
+import static com.example.datetime.LocalDateFormatUtil.formatDate;
+import static com.example.datetime.LocalDateFormatUtil.parseDate;
 import static java.time.LocalDate.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Tests for {@link LocalDateFormatter}.
+ * Tests for {@link LocalDateFormatUtil}.
  */
-@DisplayName("LocalDateFormatter")
-class LocalDateFormatterTest {
+@DisplayName("LocalDateFormatUtil")
+class LocalDateFormatUtilTests {
 
     @Test
     @DisplayName("Parsing dates.")

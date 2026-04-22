@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
  * Tests for {@link SimpleDateInterval}.
  */
 @DisplayName("Tests for SimpleDateInterval")
-public class SimpleDateIntervalTests {
+class SimpleDateIntervalTests {
     static final LocalDate PREVIOUS_DATE = of(2022, 1, 1);
     static final LocalDate POSTERIOR_DATE = of(2022, 1, 5);
 

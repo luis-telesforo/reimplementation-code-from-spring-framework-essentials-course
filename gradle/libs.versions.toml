@@ -5,11 +5,13 @@ junit-version = "6.0.0"
 checkstyle = "13.4.0"
 java = "25"
 jacoco = "0.8.14"
+jakarta = "3.2.0"
 
 [libraries]
 junit-platform-bom = { module = "org.junit:junit-bom", version.ref = "junit-version" }
 junit-jupiter = {module = "org.junit.jupiter:junit-jupiter"}
 junit-platform-launcher = {module ="org.junit.platform:junit-platform-launcher"}
+jakarta-persistence-api = {module = "jakarta.persistence:jakarta.persistence-api", version.ref = "jakarta"}
 
 [plugins]
 java-library = {id = "java-library"}

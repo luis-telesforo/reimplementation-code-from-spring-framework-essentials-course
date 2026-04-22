@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Tests for {@link MonetaryAmount}.
  */
 @DisplayName("MonetaryAmount tests")
-public class MonetaryAmountTests {
+class MonetaryAmountTests {
 
     @Test
     @DisplayName("Non-Canonical constructor")

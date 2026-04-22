@@ -10,6 +10,7 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.jakarta.persistence.api)
     testImplementation(platform(libs.junit.platform.bom))
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.platform.launcher)
