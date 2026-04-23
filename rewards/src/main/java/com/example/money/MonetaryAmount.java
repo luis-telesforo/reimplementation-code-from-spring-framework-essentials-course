@@ -27,7 +27,7 @@ public record MonetaryAmount(BigDecimal value) {
      *
      * @param value the monetary amount as a {@code double}
      */
-    MonetaryAmount(double value) {
+    public MonetaryAmount(double value) {
         this(valueOf(value));
     }
 
@@ -55,7 +55,7 @@ public record MonetaryAmount(BigDecimal value) {
      * @param amount the amount to subtract.
      * @return the difference.
      */
-    MonetaryAmount minus(MonetaryAmount amount) {
+    public MonetaryAmount minus(MonetaryAmount amount) {
         return new MonetaryAmount(this.value.subtract(amount.value));
     }
 
@@ -65,7 +65,7 @@ public record MonetaryAmount(BigDecimal value) {
      * @param amount the amount to multiply by.
      * @return the new amount.
      */
-    MonetaryAmount multiplyBy(double amount) {
+    public MonetaryAmount multiplyBy(double amount) {
         return new MonetaryAmount(this.value.multiply(valueOf(amount)));
     }
 
@@ -75,7 +75,7 @@ public record MonetaryAmount(BigDecimal value) {
      * @param amount the monetary amount.
      * @return {@code true} if and only if this amount is greater than the other {@link MonetaryAmount}.
      */
-    boolean greaterThan(MonetaryAmount amount) {
+    public boolean greaterThan(MonetaryAmount amount) {
         return this.value.compareTo(amount.value) > 0;
     }
 
@@ -85,7 +85,7 @@ public record MonetaryAmount(BigDecimal value) {
      *
      * @return this amount as a {@code double}.
      */
-    double asDouble() {
+    public double asDouble() {
         return this.value.doubleValue();
     }
 }
