@@ -17,6 +17,4 @@ plugins {
 }
 
 rootProject.name = "reimplementation-code-from-spring-framework-essentials-course"
-include("app")
-
 include("rewards")
