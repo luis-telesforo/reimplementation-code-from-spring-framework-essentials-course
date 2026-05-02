@@ -2,7 +2,6 @@ package com.example.database;
 
 import com.example.money.MonetaryAmount;
 import com.example.money.Percentage;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,36 +11,39 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static com.example.money.Percentage.oneHundred;
+import static com.example.money.Percentage.zero;
+import static jakarta.persistence.CascadeType.ALL;
+import static java.util.Collections.unmodifiableSet;
+
 /**
  * An account for a member of the reward network. An account has one or more
- * beneficiaries whose allocations must add up to 100%.
+ * {@link Beneficiary Beneficiaries} whose allocations must add up to 100%.
  * An account can make contributions to its beneficiaries. Each contribution is
  * distributed among the beneficiaries based on an allocation.
- * An entity. An aggregate.
  */
 @Entity
 @Table(name = "T_ACCOUNT")
 public class Account {
 
     @Id
-    @Column(name = "ID")
+    @Column(name = "ID",  unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long entityId;
 
-    @Column(name = "NUMBER")
+    @Column(name = "NUMBER", nullable = false)
     private String number;
 
-    @Column(name = "NAME")
+    @Column(name = "NAME", nullable = false)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ACCOUNT_ID")
-    private Set<Beneficiary> beneficiaries = new HashSet<>();
+    @OneToMany(cascade = ALL)
+    @JoinColumn(name = "ACCOUNT_ID",  nullable = false)
+    private final Set<Beneficiary> beneficiaries = new HashSet<>();
 
     protected Account() {
     }
@@ -49,10 +51,8 @@ public class Account {
     /**
      * Create a new account.
      *
-     * @param number
-     *            the account number
-     * @param name
-     *            the name on the account
+     * @param number the account number
+     * @param name the name on the account
      */
     public Account(String number, String name) {
         this.number = number;
@@ -76,8 +76,7 @@ public class Account {
      * data access code (repositories that work with an Object Relational Mapper
      * (ORM)). Should never be set by application code explicitly.
      *
-     * @param entityId
-     *            the internal entity identifier
+     * @param entityId the internal entity identifier
      */
     public void setEntityId(Long entityId) {
         this.entityId = entityId;
@@ -93,8 +92,7 @@ public class Account {
     /**
      * Sets the number used to uniquely identify this account.
      *
-     * @param number
-     *            The number for this account
+     * @param number the number for this account
      */
     public void setNumber(String number) {
         this.number = number;
@@ -110,30 +108,27 @@ public class Account {
     /**
      * Sets the name on file for this account.
      *
-     * @param name
-     *            The name for this account
+     * @param name the name for this account
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * Add a single beneficiary with a 100% allocation percentage.
+     * Add a single {@link Beneficiary} with a 100% allocation percentage.
      *
-     * @param beneficiaryName
-     *            the name of the beneficiary (should be unique)
+     * @param beneficiaryName the name of the {@link Beneficiary}
      */
     public void addBeneficiary(String beneficiaryName) {
-        addBeneficiary(beneficiaryName, Percentage.oneHundred());
+        addBeneficiary(beneficiaryName, oneHundred());
     }
 
     /**
-     * Add a single beneficiary with the specified allocation percentage.
+     * Add a single {@link Beneficiary} with the specified allocation {@link Percentage}.
      *
-     * @param beneficiaryName
-     *            the name of the beneficiary (should be unique)
-     * @param allocationPercentage
-     *            the beneficiary's allocation percentage within this account
+     * @param beneficiaryName the name of the {@link Beneficiary}
+     * @param allocationPercentage the beneficiary's allocation {@link Percentage} within this
+     *                             account
      */
     public void addBeneficiary(String beneficiaryName,
                                Percentage allocationPercentage) {
@@ -151,22 +146,21 @@ public class Account {
      * @return the beneficiaries of this account
      */
     public Set<Beneficiary> getBeneficiaries() {
-        return Collections.unmodifiableSet(beneficiaries);
+        return unmodifiableSet(beneficiaries);
     }
 
     /**
-     * Returns a single account beneficiary. Callers should not attempt to hold
+     * Returns a single account {@link Beneficiary}. Callers should not attempt to hold
      * on or modify the returned object. This method should only be used
      * transitively; for example, called to facilitate reporting or testing.
      *
-     * @param name
-     *            the name of the beneficiary e.g "Annabelle"
-     * @return the beneficiary object
+     * @param name the name of the {@link Beneficiary}
+     * @return the {@link Beneficiary}
      */
     public Beneficiary getBeneficiary(String name) {
-        for (Beneficiary b : beneficiaries) {
-            if (b.getName().equals(name)) {
-                return b;
+        for (Beneficiary beneficiary : beneficiaries) {
+            if (beneficiary.getName().equals(name)) {
+                return beneficiary;
             }
         }
         throw new IllegalArgumentException("No such beneficiary with name '"
@@ -174,31 +168,29 @@ public class Account {
     }
 
     /**
-     * Removes a single beneficiary from this account.
+     * Removes a single {@link Beneficiary} from this account.
      *
-     * @param beneficiaryName
-     *            the name of the beneficiary (should be unique)
+     * @param beneficiaryName the name of the {@link Beneficiary}
      */
     public void removeBeneficiary(String beneficiaryName) {
         beneficiaries.remove(getBeneficiary(beneficiaryName));
     }
 
     /**
-     * Validation check that returns true only if the total beneficiary
+     * Validation check that returns {@code true} only if the total beneficiary
      * allocation adds up to 100%.
      */
     public boolean isValid() {
-        Percentage totalPercentage = Percentage.zero();
-        for (Beneficiary b : beneficiaries) {
+        Percentage totalPercentage = zero();
+        for (Beneficiary beneficiary : beneficiaries) {
             try {
-                totalPercentage = totalPercentage.add(b
+                totalPercentage = totalPercentage.add(beneficiary
                         .getAllocationPercentage());
-            } catch (IllegalArgumentException e) {
-                // total would have been over 100% - return invalid
+            } catch (IllegalArgumentException illegalArgumentException) {
                 return false;
             }
         }
-        return totalPercentage.equals(Percentage.oneHundred());
+        return totalPercentage.equals(oneHundred());
     }
 
     public void setValid(boolean valid) {
@@ -210,7 +202,7 @@ public class Account {
      * distributed among the account's beneficiaries based on each beneficiary's
      * allocation percentage.
      *
-     * @param amount the total amount to contribute
+     * @param amount the total {@link MonetaryAmount} to contribute
      */
     public AccountContribution makeContribution(MonetaryAmount amount) {
         if (!isValid()) {
@@ -224,8 +216,7 @@ public class Account {
     /**
      * Distribute the contribution amount among this account's beneficiaries.
      *
-     * @param amount
-     *            the total contribution amount
+     * @param amount the total contribution amount
      * @return the individual beneficiary distributions
      */
     private Set<Distribution> distribute(MonetaryAmount amount) {
@@ -244,21 +235,20 @@ public class Account {
     }
 
     /**
-     * Used to restore an allocated beneficiary. Should only be called by the
+     * Used to restore an allocated {@link  Beneficiary}. Should only be called by the
      * repository responsible for reconstituting this account.
      *
-     * @param beneficiary
-     *            the beneficiary
+     * @param beneficiary the {@link  Beneficiary}
      */
     void restoreBeneficiary(Beneficiary beneficiary) {
         beneficiaries.add(beneficiary);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
+    public boolean equals(Object other) {
+        if (this == other) return true;
+        if (other == null || getClass() != other.getClass()) return false;
+        Account account = (Account) other;
         return Objects.equals(entityId, account.entityId) &&
                 Objects.equals(number, account.number) &&
                 Objects.equals(name, account.name) &&
